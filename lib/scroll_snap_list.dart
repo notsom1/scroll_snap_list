@@ -65,6 +65,8 @@ class ScrollSnapList extends StatefulWidget {
   ///Can be used to load more data from database.
   final Function? onReachEnd;
 
+  final Function? onReachFirst;
+
   ///Container's padding
   final EdgeInsetsGeometry? padding;
 
@@ -140,6 +142,7 @@ class ScrollSnapList extends StatefulWidget {
       this.margin,
       required this.onItemFocus,
       this.onReachEnd,
+      this.onReachFirst,
       this.padding,
       this.reverse = false,
       this.updateOnScroll,
@@ -300,6 +303,10 @@ class ScrollSnapListState extends State<ScrollSnapList> {
     if (widget.onReachEnd != null) widget.onReachEnd!();
   }
 
+  void onReachFirst() {
+    if (widget.onReachFirst != null) widget.onReachFirst!();
+  }
+
   @override
   void dispose() {
     widget.listController.dispose();
@@ -373,6 +380,11 @@ class ScrollSnapListState extends State<ScrollSnapList> {
                   if (scrollInfo.metrics.pixels >=
                       scrollInfo.metrics.maxScrollExtent - tolerance) {
                     _onReachEnd();
+                  }
+
+                  if (scrollInfo.metrics.pixels <=
+                      scrollInfo.metrics.minScrollExtent + tolerance) {
+                    _onReachStart();
                   }
 
                   //snap the selection
