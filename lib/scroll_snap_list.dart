@@ -303,7 +303,7 @@ class ScrollSnapListState extends State<ScrollSnapList> {
     if (widget.onReachEnd != null) widget.onReachEnd!();
   }
 
-  void onReachFirst() {
+  void _onReachFirst() {
     if (widget.onReachFirst != null) widget.onReachFirst!();
   }
 
@@ -384,7 +384,7 @@ class ScrollSnapListState extends State<ScrollSnapList> {
 
                   if (scrollInfo.metrics.pixels <=
                       scrollInfo.metrics.minScrollExtent + tolerance) {
-                    _onReachStart();
+                    _onReachFirst();
                   }
 
                   //snap the selection
